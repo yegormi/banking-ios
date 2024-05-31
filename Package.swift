@@ -7,6 +7,7 @@ let package = Package(
     platforms: [.iOS(.v17)],
     products: [
         .library(name: "AppFeature", targets: ["AppFeature"]),
+        .library(name: "Helpers", targets: ["Helpers"]),
         .library(name: "HomeFeature", targets: ["HomeFeature"]),
         .library(name: "TabsFeature", targets: ["TabsFeature"]),
         .library(name: "Styleguide", targets: ["Styleguide"]),
@@ -24,6 +25,10 @@ let package = Package(
             ]
         ),
         .target(
+            name: "Helpers",
+            dependencies: []
+        ),
+        .target(
             name: "HomeFeature",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
@@ -36,6 +41,7 @@ let package = Package(
             name: "TabsFeature",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "Helpers",
                 "HomeFeature",
                 "Styleguide",
                 "SwiftUIHelpers"

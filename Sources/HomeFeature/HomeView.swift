@@ -14,7 +14,14 @@ public struct HomeView: View {
     
     public var body: some View {
         List {
-            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("🇪🇺 EUR account")
+                    .font(.system(size: 15))
+                    .foregroundStyle(Color.gray)
+                Text("€153,000.85")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundStyle(Color.primary)
+            }
         }
         .onAppear {
             send(.onAppear)

@@ -1,13 +1,23 @@
 import ComposableArchitecture
+import Helpers
+import HomeFeature
 import Styleguide
 import SwiftUI
-import HomeFeature
 
 public struct TabsView: View {
     @Bindable public var store: StoreOf<Tabs>
 
     public init(store: StoreOf<Tabs>) {
         self.store = store
+        
+        // Configure tab bar layout
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = .white
+        appearance.shadowImage = UIColor(Color.black.opacity(0.3)).image(size: CGSize(width: 1.0, height: 1.0))
+        appearance.shadowColor = nil
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 
     public var body: some View {
@@ -28,6 +38,7 @@ public struct TabsView: View {
                 TransactionsView(
                     store: self.store.scope(state: \.transactions, action: \.transactions)
                 )
+                .background(Color.appBackground)
                 .navigationTitle("Transactions")
                 .toolbarTitleDisplayMode(.inlineLarge)
             }
@@ -40,6 +51,7 @@ public struct TabsView: View {
                 CardsView(
                     store: self.store.scope(state: \.cards, action: \.cards)
                 )
+                .background(Color.appBackground)
                 .navigationTitle("My Cards")
                 .toolbarTitleDisplayMode(.inlineLarge)
             }
@@ -52,6 +64,7 @@ public struct TabsView: View {
                 AccountView(
                     store: self.store.scope(state: \.account, action: \.account)
                 )
+                .background(Color.appBackground)
                 .navigationTitle("Account")
                 .toolbarTitleDisplayMode(.inlineLarge)
             }
