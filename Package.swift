@@ -50,7 +50,9 @@ let package = Package(
         .target(
             name: "HomeFeature",
             dependencies: [
+                "APIClient",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "SharedModels",
                 "Styleguide",
                 "SwiftUIHelpers"
             ],

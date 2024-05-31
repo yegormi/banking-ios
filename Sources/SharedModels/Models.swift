@@ -1,62 +1,61 @@
 import Foundation
 
-enum CardStatus: String, Codable {
+public enum CardStatus: String, Codable {
     case active
     case locked
     case terminated
 }
 
-enum TransactionStatus: String, Codable {
+public enum TransactionStatus: String, Codable {
     case completed
     case pending
     case failed
 }
 
-enum TransactionType: String, Codable {
+public enum TransactionType: String, Codable {
     case deposit
     case withdrawal
 }
 
-enum LimitType: String, Codable {
+public enum LimitType: String, Codable {
     case daily = "PerDay"
     case weekly = "PerWeek"
     case monthly = "PerMonth"
 }
 
-struct AppBalance: Codable {
-    let balance: Double
+public struct AppBalance: Codable {
+    public let balance: Double
 }
 
-struct CardHolder: Codable {
-    let id: UUID
-    let fullName: String
-    let email: String
-    let logoUrl: URL
+public struct CardHolder: Codable {
+    public let id: UUID
+    public let fullName: String
+    public let email: String
+    public let logoUrl: URL
 }
 
-struct AppCard: Codable, Identifiable {
-    let id: UUID
-    let cardLast4: String
-    let cardName: String
-    let isLocked: Bool
-    let isTerminated: Bool
-    let spent: Double
-    let limit: Double
-    let limitType: LimitType
-    let cardHolder: CardHolder
-    let fundingSource: String
-    let issuedAt: Date
+public struct AppCard: Codable, Identifiable {
+    public let id: UUID
+    public let cardLast4: String
+    public let cardName: String
+    public let isLocked: Bool
+    public let isTerminated: Bool
+    public let spent: Double
+    public let limit: Double
+    public let limitType: LimitType
+    public let cardHolder: CardHolder
+    public let fundingSource: String
+    public let issuedAt: Date
 }
 
-struct AppTransaction: Codable, Identifiable {
-    let id: UUID
-    let tribeTransactionId: UUID
-    let tribeCardId: Int
-    let amount: Double
-    let status: TransactionStatus
-    let tribeTransactionType: TransactionType
-    let schemeId: UUID
-    let merchantName: String
-    let pan: String
+public struct AppTransaction: Codable, Identifiable {
+    public let id: UUID
+    public let tribeTransactionId: UUID
+    public let tribeCardId: Int
+    public let amount: Double
+    public let status: TransactionStatus
+    public let tribeTransactionType: TransactionType
+    public let schemeId: UUID
+    public let merchantName: String
+    public let pan: String
 }
-

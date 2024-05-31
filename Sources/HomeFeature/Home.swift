@@ -1,5 +1,7 @@
+import APIClient
 import ComposableArchitecture
 import Foundation
+import SharedModels
 
 @Reducer
 public struct Home: Reducer {
@@ -16,14 +18,18 @@ public struct Home: Reducer {
         case `internal`(Internal)
         case view(View)
 
-        public enum Delegate: Equatable {
+        public enum Delegate {
         }
 
-        public enum Internal: Equatable {
+        public enum Internal {
+            case balanceResponse(Result<AppBalance, Error>)
+            case cardsResponse(Result<[AppCard], Error>)
+            case transactionsResponse(Result<[AppTransaction], Error>)
         }
 
-        public enum View: Equatable, BindableAction {
+        public enum View: BindableAction {
             case binding(BindingAction<Home.State>)
+            case onFirstAppear
             case onAppear
         }
     }
@@ -31,6 +37,8 @@ public struct Home: Reducer {
     @Reducer(state: .equatable)
     public enum Destination {
     }
+    
+    @Dependency(\.apiClient) var api
 
     public init() {}
 
@@ -50,11 +58,38 @@ public struct Home: Reducer {
 
             case .view(.binding):
                 return .none
+                
+            case .view(.onFirstAppear):
+                return self.reload(&state)
 
             case .view(.onAppear):
                 return .none
             }
         }
         .ifLet(\.$destination, action: \.destination)
+    }
+    
+    private func reload(_ state: inout State) -> Effect<Action> {
+        return .run { send in
+            await withDiscardingTaskGroup { group in
+                group.addTask {
+                    await send(.internal(.balanceResponse(Result {
+                        try await self.api.fetchBalance()
+                    })))
+                }
+
+                group.addTask {
+                    await send(.internal(.cardsResponse(Result {
+                        try await self.api.fetchCards()
+                    })))
+                }
+                
+                group.addTask {
+                    await send(.internal(.transactionsResponse(Result {
+                        try await self.api.fetchTransactions()
+                    })))
+                }
+            }
+        }
     }
 }

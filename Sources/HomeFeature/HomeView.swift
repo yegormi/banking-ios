@@ -126,6 +126,9 @@ public struct HomeView: View {
                 }
             }
         }
+        .onFirstAppear {
+            send(.onFirstAppear)
+        }
         .onAppear {
             send(.onAppear)
         }
