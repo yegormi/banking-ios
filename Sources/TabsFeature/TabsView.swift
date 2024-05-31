@@ -26,6 +26,7 @@ public struct TabsView: View {
                 HomeView(
                     store: self.store.scope(state: \.home, action: \.home)
                 )
+                .background(Color.appBackground)
                 .navigationTitle("Money")
                 .toolbarTitleDisplayMode(.large)
             }
