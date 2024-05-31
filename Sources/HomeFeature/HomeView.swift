@@ -23,6 +23,15 @@ public struct HomeView: View {
                     .foregroundStyle(Color.primary)
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    // Action for the plus button
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+        }
         .onAppear {
             send(.onAppear)
         }

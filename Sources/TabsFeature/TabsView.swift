@@ -13,7 +13,7 @@ public struct TabsView: View {
         // Configure tab bar layout
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .white
-        appearance.shadowImage = UIColor(Color.black.opacity(0.3)).image(size: CGSize(width: 1.0, height: 1.0))
+        appearance.shadowImage = UIColor(Color.black.opacity(0.3)).image(size: CGSize(width: 1.0, height: 0.3))
         appearance.shadowColor = nil
 
         UITabBar.appearance().standardAppearance = appearance
@@ -26,10 +26,10 @@ public struct TabsView: View {
                 HomeView(
                     store: self.store.scope(state: \.home, action: \.home)
                 )
-                .navigationTitle("Home")
-                .toolbarTitleDisplayMode(.inlineLarge)
+                .navigationTitle("Money")
+                .toolbarTitleDisplayMode(.large)
             }
-            .tag(Tabs.State.Tab.account)
+            .tag(Tabs.State.Tab.home)
             .tabItem {
                 Label("Home", image: .homeTab)
             }
@@ -40,9 +40,9 @@ public struct TabsView: View {
                 )
                 .background(Color.appBackground)
                 .navigationTitle("Transactions")
-                .toolbarTitleDisplayMode(.inlineLarge)
+                .toolbarTitleDisplayMode(.large)
             }
-            .tag(Tabs.State.Tab.account)
+            .tag(Tabs.State.Tab.transactions)
             .tabItem {
                 Label("Transactions", image: .transactionsTab)
             }
@@ -53,9 +53,9 @@ public struct TabsView: View {
                 )
                 .background(Color.appBackground)
                 .navigationTitle("My Cards")
-                .toolbarTitleDisplayMode(.inlineLarge)
+                .toolbarTitleDisplayMode(.large)
             }
-            .tag(Tabs.State.Tab.account)
+            .tag(Tabs.State.Tab.cards)
             .tabItem {
                 Label("My Cards", image: .cardsTab)
             }
@@ -66,7 +66,7 @@ public struct TabsView: View {
                 )
                 .background(Color.appBackground)
                 .navigationTitle("Account")
-                .toolbarTitleDisplayMode(.inlineLarge)
+                .toolbarTitleDisplayMode(.large)
             }
             .tag(Tabs.State.Tab.account)
             .tabItem {
