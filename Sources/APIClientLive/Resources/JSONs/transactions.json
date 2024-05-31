@@ -1,0 +1,35 @@
+[
+  {
+    "id": "7g8h9i0j-1234-56gh-7890-abcdef123456",
+    "tribeTransactionId": "8h9i0j1k-2345-67hi-8901-bcdef1234567",
+    "tribeCardId": 1,
+    "amount": 200.00,
+    "status": "completed",
+    "tribeTransactionType": "deposit",
+    "schemeId": "9i0j1k2l-3456-78ij-9012-cdef12345678",
+    "merchantName": "Stripe",
+    "pan": "5678"
+  },
+  {
+    "id": "0j1k2l3m-4567-89jk-0123-def123456789",
+    "tribeTransactionId": "1k2l3m4n-5678-90kl-1234-ef1234567890",
+    "tribeCardId": 1,
+    "amount": 75.50,
+    "status": "pending",
+    "tribeTransactionType": "withdrawal",
+    "schemeId": "2l3m4n5o-6789-01lm-2345-f12345678901",
+    "merchantName": "PayPal",
+    "pan": "1234"
+  },
+  {
+    "id": "3m4n5o6p-7890-12mn-3456-123456789012",
+    "tribeTransactionId": "4n5o6p7q-8901-23no-4567-234567890123",
+    "tribeCardId": 2,
+    "amount": 150.75,
+    "status": "completed",
+    "tribeTransactionType": "deposit",
+    "schemeId": "5o6p7q8r-9012-34op-5678-345678901234",
+    "merchantName": "Square",
+    "pan": "9876"
+  }
+]

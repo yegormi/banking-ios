@@ -1,0 +1,58 @@
+{
+  "cards": [
+    {
+      "id": "1a2b3c4d-5678-90ab-cdef-1234567890ab",
+      "cardLast4": "5678",
+      "cardName": "Business Card",
+      "isLocked": false,
+      "isTerminated": false,
+      "spent": 500.75,
+      "limit": 5000.00,
+      "limitType": "PerMonth",
+      "cardHolder": {
+        "id": "2b3c4d5e-6789-01bc-def2-34567890abcd",
+        "fullName": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "logoUrl": "https://example.com/logo.png"
+      },
+      "fundingSource": "ACH",
+      "issuedAt": "2024-05-31T12:00:00Z"
+    },
+    {
+      "id": "3c4d5e6f-7890-12cd-ef34-567890abcdef",
+      "cardLast4": "1234",
+      "cardName": "Personal Card",
+      "isLocked": false,
+      "isTerminated": false,
+      "spent": 150.50,
+      "limit": 2000.00,
+      "limitType": "PerMonth",
+      "cardHolder": {
+        "id": "4d5e6f7g-8901-23de-f456-7890abcdef12",
+        "fullName": "John Doe",
+        "email": "john.doe@example.com",
+        "logoUrl": "https://example.com/logo2.png"
+      },
+      "fundingSource": "Wire Transfer",
+      "issuedAt": "2024-05-31T12:00:00Z"
+    },
+    {
+      "id": "5e6f7g8h-9012-34ef-5678-90abcdef1234",
+      "cardLast4": "9876",
+      "cardName": "Travel Card",
+      "isLocked": true,
+      "isTerminated": false,
+      "spent": 300.00,
+      "limit": 3000.00,
+      "limitType": "PerWeek",
+      "cardHolder": {
+        "id": "6f7g8h9i-0123-45fg-6789-0abcdef12345",
+        "fullName": "Alice Brown",
+        "email": "alice.brown@example.com",
+        "logoUrl": "https://example.com/logo3.png"
+      },
+      "fundingSource": "Credit",
+      "issuedAt": "2024-05-31T12:00:00Z"
+    }
+  ]
+}

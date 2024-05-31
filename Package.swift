@@ -6,17 +6,36 @@ let package = Package(
     name: "banking-ios",
     platforms: [.iOS(.v17)],
     products: [
+        .library(name: "APIClient", targets: ["APIClient"]),
+        .library(name: "APIClientLive", targets: ["APIClientLive"]),
         .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "Helpers", targets: ["Helpers"]),
         .library(name: "HomeFeature", targets: ["HomeFeature"]),
         .library(name: "TabsFeature", targets: ["TabsFeature"]),
+        .library(name: "SharedModels", targets: ["SharedModels"]),
         .library(name: "Styleguide", targets: ["Styleguide"]),
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.9.2"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
     ],
     targets: [
+        .target(
+            name: "APIClient",
+            dependencies: [
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies"),
+                "SharedModels"
+            ]
+        ),
+        .target(
+            name: "APIClientLive",
+            dependencies: [
+                "APIClient",
+                "SharedModels",
+            ]
+        ),
         .target(
             name: "AppFeature",
             dependencies: [
@@ -47,6 +66,10 @@ let package = Package(
                 "SwiftUIHelpers"
             ],
             resources: [.process("Resources")]
+        ),
+        .target(
+            name: "SharedModels",
+            dependencies: []
         ),
         .target(
             name: "Styleguide",
