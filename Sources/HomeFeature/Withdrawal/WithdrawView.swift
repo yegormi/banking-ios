@@ -12,34 +12,20 @@ public struct WithdrawalView: View {
     public init(store: StoreOf<Withdrawal>) {
         self.store = store
     }
-    
-    @FocusState var focus: Withdrawal.State.Field?
 
-    private var formattedAmount: Binding<String> {
-        Binding(
-            get: {
-                guard let amount = self.store.amount else { return "" }
-                return Withdrawal.State.currency.string(from: amount as NSNumber) ?? ""
-            },
-            set: { newValue in
-                let filteredValue = newValue.filter { "0123456789.".contains($0) }
-                if let decimalValue = Decimal(string: filteredValue) {
-                    self.store.amount = decimalValue
-                }
-            }
-        )
-    }
+    @FocusState var focus: Withdrawal.State.Field?
 
     public var body: some View {
         VStack(spacing: 12) {
             HStack(spacing: 8) {
                 Group {
                     Text("€")
-                    TextField("0", text: self.formattedAmount)
-                        .fixedSize(horizontal: true, vertical: false)
-                        .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.leading)
-                        .focused(self.$focus, equals: .amount)
+                    NumberTextField(
+                        value: self.$store.amount,
+                        maxLength: 15,
+                        decimalPlacesLimit: 2
+                    )
+                    .focused(self.$focus, equals: .amount)
                 }
                 .font(.system(size: 34, weight: .bold))
             }

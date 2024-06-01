@@ -14,12 +14,6 @@ public struct Withdrawal: Reducer {
         var balance: AppBalance
         var amount: Decimal?
         var focus: Field? = .amount
-        
-        static var currency: NumberFormatter {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            return formatter
-        }
     }
 
     public enum Action: ViewAction {
