@@ -15,16 +15,14 @@ public struct HomeView: View {
     public var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                if let balance = store.balance {
-                    CardView {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("🇪🇺 EUR account")
-                                .font(.system(size: 15))
-                                .foregroundStyle(Color.gray)
-                            Text("€\(balance.balance, specifier: "%.2f")")
-                                .font(.system(size: 28, weight: .bold))
-                                .foregroundStyle(Color.primary)
-                        }
+                CardView {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("🇪🇺 EUR account")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color.gray)
+                        Text("€\(self.store.balance?.balance ?? 0.0, specifier: "%.2f")")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundStyle(Color.primary)
                     }
                 }
 
@@ -63,11 +61,33 @@ public struct HomeView: View {
         .contentMargins(.horizontal, 16, for: .scrollContent)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    // Action for the plus button
-                }) {
+                Button {
+                    send(.withdrawalButtonTapped)
+                } label: {
                     Image(systemName: "plus")
                 }
+
+            }
+        }
+        .sheet(
+            item: self.$store.scope(state: \.destination?.withdrawal, action: \.destination.withdrawal)
+        ) { store in
+            NavigationStack {
+                WithdrawalView(store: store)
+                    .padding(16)
+                    .background(Color.appBackground)
+                    .navigationTitle("Transfer")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                send(.closeWithdrawalButtonTapped)
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .foregroundStyle(Color.black)
+                            }
+                        }
+                    }
             }
         }
         .onFirstAppear {
