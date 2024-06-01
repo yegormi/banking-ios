@@ -33,13 +33,16 @@ public struct Home: Reducer {
 
         public enum View: BindableAction {
             case binding(BindingAction<Home.State>)
+            case withdrawalButtonTapped
             case onFirstAppear
             case onAppear
         }
     }
 
     @Reducer(state: .equatable)
-    public enum Destination {}
+    public enum Destination {
+        case withdrawal(Withdrawal)
+    }
 
     @Dependency(\.apiClient) var api
 
@@ -84,6 +87,11 @@ public struct Home: Reducer {
                 return .none
 
             case .view(.binding):
+                return .none
+                
+            case .view(.withdrawalButtonTapped):
+                guard let balance = state.balance else { return .none }
+                state.destination = .withdrawal(Withdrawal.State(balance: balance))
                 return .none
 
             case .view(.onFirstAppear):

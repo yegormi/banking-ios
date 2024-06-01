@@ -63,12 +63,22 @@ public struct HomeView: View {
         .contentMargins(.horizontal, 16, for: .scrollContent)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    // Action for the plus button
-                }) {
+                Button {
+                    send(.withdrawalButtonTapped)
+                } label: {
                     Image(systemName: "plus")
                 }
+
             }
+        }
+        .sheet(
+            item: self.$store.scope(state: \.destination?.withdrawal, action: \.destination.withdrawal)
+        ) { store in
+            NavigationStack {
+                WithdrawalView(store: store)
+            }
+            .navigationTitle("Transfer")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onFirstAppear {
             send(.onFirstAppear)
