@@ -73,9 +73,9 @@ public extension AppCards {
     }
 }
 
-public extension AppTransaction {
-    static var mock1: AppTransaction {
-        AppTransaction(
+public extension CardTransaction {
+    static var mock1: CardTransaction {
+        CardTransaction(
             id: UUID(),
             tribeTransactionId: UUID(),
             tribeCardId: 1,
@@ -88,8 +88,8 @@ public extension AppTransaction {
         )
     }
     
-    static var mock2: AppTransaction {
-        AppTransaction(
+    static var mock2: CardTransaction {
+        CardTransaction(
             id: UUID(),
             tribeTransactionId: UUID(),
             tribeCardId: 1,
@@ -102,8 +102,8 @@ public extension AppTransaction {
         )
     }
     
-    static var mock3: AppTransaction {
-        AppTransaction(
+    static var mock3: CardTransaction {
+        CardTransaction(
             id: UUID(),
             tribeTransactionId: UUID(),
             tribeCardId: 2,

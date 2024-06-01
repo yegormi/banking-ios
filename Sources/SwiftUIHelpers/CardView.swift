@@ -3,20 +3,20 @@ import SwiftUI
 public struct CardStyleConfiguration {
     struct Header: View {
         var body: AnyView
-
+        
         init(_ content: some View) {
             self.body = AnyView(content)
         }
     }
-
+    
     struct Content: View {
         var body: AnyView
-
+        
         init(_ content: some View) {
             self.body = AnyView(content)
         }
     }
-
+    
     let header: Header
     let content: Content
 }
@@ -24,7 +24,7 @@ public struct CardStyleConfiguration {
 public protocol CardStyle {
     associatedtype Body: View
     typealias Configuration = CardStyleConfiguration
-
+    
     @ViewBuilder
     func makeBody(configuration: Configuration) -> Body
 }
@@ -67,10 +67,10 @@ public extension CardStyle where Self == OutlinedCardStyle {
 
 public struct CardView<Header: View, Content: View>: View {
     @Environment(\.cardStyle) var style
-
+    
     let header: () -> Header
     let content: () -> Content
-
+    
     public init(
         @ViewBuilder header: @escaping () -> Header,
         @ViewBuilder content: @escaping () -> Content
@@ -78,13 +78,13 @@ public struct CardView<Header: View, Content: View>: View {
         self.header = header
         self.content = content
     }
-
+    
     public var body: some View {
         let config = CardStyleConfiguration(
             header: .init(self.header()),
             content: .init(self.content())
         )
-
+        
         AnyView(self.style.makeBody(configuration: config))
     }
 }
@@ -94,6 +94,24 @@ public extension CardView where Header == EmptyView {
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.header = { EmptyView() }
+        self.content = content
+    }
+}
+
+public extension CardView {
+    init(
+        headerTitle: String,
+        headerAction: @escaping () -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.header = {
+            HStack {
+                Text(headerTitle)
+                    .font(.system(size: 17, weight: .semibold))
+                Spacer()
+                Button("See all", action: headerAction)
+            } as! Header
+        }
         self.content = content
     }
 }

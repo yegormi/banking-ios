@@ -11,7 +11,7 @@ public struct Home: Reducer {
 
         var balance: AppBalance?
         var cards: [AppCard] = []
-        var transactions: [AppTransaction] = []
+        var transactions: [CardTransaction] = []
         var isLoading: Bool = false
 
         public init() {}
@@ -28,7 +28,7 @@ public struct Home: Reducer {
         public enum Internal {
             case balanceResponse(TaskResult<AppBalance>)
             case cardsResponse(Result<AppCards, Error>)
-            case transactionsResponse(Result<[AppTransaction], Error>)
+            case transactionsResponse(Result<[CardTransaction], Error>)
         }
 
         public enum View: BindableAction {

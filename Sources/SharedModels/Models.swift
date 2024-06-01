@@ -52,7 +52,7 @@ public struct AppCard: Codable, Identifiable, Equatable {
     public let issuedAt: Date
 }
 
-public struct AppTransaction: Codable, Identifiable, Equatable {
+public struct CardTransaction: Codable, Identifiable, Equatable {
     public let id: UUID
     public let tribeTransactionId: UUID
     public let tribeCardId: Int
