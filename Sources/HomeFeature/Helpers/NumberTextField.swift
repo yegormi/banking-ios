@@ -2,6 +2,7 @@ import SwiftUI
 
 struct NumberTextField: View {
     @Binding var value: Decimal?
+    let placeholder: String
     let maxLength: Int
     let decimalPlacesLimit: Int
     
@@ -10,7 +11,7 @@ struct NumberTextField: View {
     
     
     var body: some View {
-        TextField("", text: $text)
+        TextField(placeholder, text: $text)
             .fixedSize(horizontal: true, vertical: false)
             .keyboardType(.decimalPad)
             .onChange(of: text) { newValue in

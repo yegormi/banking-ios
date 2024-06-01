@@ -22,6 +22,7 @@ public struct WithdrawalView: View {
                     Text("€")
                     NumberTextField(
                         value: self.$store.amount,
+                        placeholder: "0",
                         maxLength: 15,
                         decimalPlacesLimit: 2
                     )
@@ -30,9 +31,10 @@ public struct WithdrawalView: View {
                 .font(.system(size: 34, weight: .bold))
             }
             
-            Text("You have \(self.store.balance.balance, specifier: "%.2f")\n available in your balance")
+            Text("You \(self.store.isExceededBalance ? "only " : "")have \(self.store.balance.balance, specifier: "%.2f")\n available in your balance")
                 .font(.system(size: 13, weight: .semibold))
                 .multilineTextAlignment(.center)
+                .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .bottom) {
@@ -40,6 +42,8 @@ public struct WithdrawalView: View {
                 send(.continueButtonTapped)
             }
             .buttonStyle(.primary(size: .fullWidth))
+            .disabled(!self.store.isFormValid)
+            .animation(.default, value: self.store.isFormValid)
         }
         .onFirstAppear {
             send(.onFirstAppear)

@@ -14,6 +14,15 @@ public struct Withdrawal: Reducer {
         var balance: AppBalance
         var amount: Decimal?
         var focus: Field? = .amount
+        var isExceededBalance: Bool {
+            guard let amount = self.amount else { return false }
+            let balance = Decimal(floatLiteral: self.balance.balance)
+            return amount > balance
+        }
+        var isFormValid: Bool {
+            guard let amount = self.amount else { return false }
+            return amount > 0 && !self.isExceededBalance
+        }
     }
 
     public enum Action: ViewAction {
