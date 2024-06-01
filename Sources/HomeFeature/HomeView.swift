@@ -51,7 +51,7 @@ public struct HomeView: View {
                         Button("See all") {}
                     }
                 } content: {
-                    VStack(spacing: 16) {
+                    VStack(spacing: 8) {
                         ForEach(store.transactions) { transaction in
                             CardTransactionCell(transaction: transaction)
                         }
