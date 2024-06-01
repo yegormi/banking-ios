@@ -25,6 +25,10 @@ public enum LimitType: String, Codable, Equatable {
 
 public struct AppBalance: Codable, Equatable {
     public let balance: Double
+    
+    public init(balance: Double) {
+        self.balance = balance
+    }
 }
 
 public struct AppCards: Codable, Equatable {

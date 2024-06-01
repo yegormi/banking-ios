@@ -7,7 +7,19 @@ import SharedModels
 public struct Withdrawal: Reducer {
     @ObservableState
     public struct State: Equatable {
+        public enum Field: Hashable {
+            case amount
+        }
+        
         var balance: AppBalance
+        var amount: Decimal?
+        var focus: Field? = .amount
+        
+        static var currency: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            return formatter
+        }
     }
 
     public enum Action: ViewAction {
@@ -16,13 +28,16 @@ public struct Withdrawal: Reducer {
         case `internal`(Internal)
         case view(View)
 
-        public enum Delegate {}
+        public enum Delegate {
+            case withdrawalDone
+        }
 
         public enum Internal {
         }
 
         public enum View: BindableAction {
             case binding(BindingAction<Withdrawal.State>)
+            case continueButtonTapped
             case onFirstAppear
             case onAppear
         }
@@ -57,6 +72,9 @@ public struct Withdrawal: Reducer {
 
             case .view(.onAppear):
                 return .none
+                
+            case .view(.continueButtonTapped):
+                return .send(.delegate(.withdrawalDone))
             }
         }
     }

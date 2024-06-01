@@ -34,6 +34,7 @@ public struct Home: Reducer {
         public enum View: BindableAction {
             case binding(BindingAction<Home.State>)
             case withdrawalButtonTapped
+            case closeWithdrawalButtonTapped
             case onFirstAppear
             case onAppear
         }
@@ -55,7 +56,16 @@ public struct Home: Reducer {
             switch action {
             case .delegate:
                 return .none
-
+                
+            case .destination(.presented(.withdrawal(.delegate(.withdrawalDone)))):
+                guard
+                    let amount = state.destination?.withdrawal?.amount,
+                    let currentBalance = state.balance?.balance else { return .none }
+                let newBalance = currentBalance - Double(truncating: amount as NSNumber)
+                state.balance = AppBalance(balance: newBalance)
+                state.destination = nil
+                return .none
+                
             case .destination:
                 return .none
 
@@ -93,6 +103,10 @@ public struct Home: Reducer {
                 guard let balance = state.balance else { return .none }
                 state.destination = .withdrawal(Withdrawal.State(balance: balance))
                 return .none
+                
+            case .view(.closeWithdrawalButtonTapped):
+                state.destination = nil
+                return .none
 
             case .view(.onFirstAppear):
                 return self.reload(&state)
@@ -125,6 +139,6 @@ public struct Home: Reducer {
                     })))
                 }
             }
-        }
+        }.animation()
     }
 }
