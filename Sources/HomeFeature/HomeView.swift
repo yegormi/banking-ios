@@ -33,26 +33,12 @@ public struct HomeView: View {
                         Text("My cards")
                             .font(.system(size: 17, weight: .semibold))
                         Spacer()
-                        Button("See all") {
-                            // Action for see all
-                        }
+                        Button("See all") {}
                     }
                 } content: {
-                    VStack(spacing: 8) {
-                        ForEach(store.cards) { card in
-                            HStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.black)
-                                    .frame(width: 40, height: 40)
-                                    .overlay(
-                                        Text(card.cardLast4)
-                                            .foregroundStyle(Color.white)
-                                            .font(.system(size: 15, weight: .semibold))
-                                    )
-                                Text(card.cardName)
-                                    .font(.system(size: 17))
-                                Spacer()
-                            }
+                    VStack(alignment: .leading, spacing: 24) {
+                        ForEach(self.store.cards) { card in
+                            AppCardCell(card: card)
                         }
                     }
                 }
@@ -62,26 +48,12 @@ public struct HomeView: View {
                         Text("Recent transactions")
                             .font(.system(size: 17, weight: .semibold))
                         Spacer()
-                        Button("See all") {
-                            // Action for see all
-                        }
+                        Button("See all") {}
                     }
                 } content: {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 16) {
                         ForEach(store.transactions) { transaction in
-                            HStack {
-                                Image(systemName: transaction.tribeTransactionType == .deposit ? "arrow.down.circle.fill" : "creditcard.fill")
-                                    .foregroundStyle(transaction.tribeTransactionType == .deposit ? Color.green : Color.red)
-                                    .font(.system(size: 20))
-                                VStack(alignment: .leading) {
-                                    Text(transaction.merchantName)
-                                        .font(.system(size: 17))
-                                    Text(transaction.tribeTransactionType == .deposit ? "+€\(transaction.amount, specifier: "%.2f")" : "-€\(transaction.amount, specifier: "%.2f")")
-                                        .font(.system(size: 15))
-                                        .foregroundStyle(transaction.tribeTransactionType == .deposit ? Color.green : Color.primary)
-                                }
-                                Spacer()
-                            }
+                            CardTransactionCell(transaction: transaction)
                         }
                     }
                 }

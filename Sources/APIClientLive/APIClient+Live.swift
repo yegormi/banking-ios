@@ -21,7 +21,7 @@ extension APIClient: DependencyKey {
             },
             fetchTransactions: {
                 try await clock.sleep(for: .seconds(2))
-                return try await client.loadMockData(filename: "transactions", type: [AppTransaction].self)
+                return try await client.loadMockData(filename: "transactions", type: [CardTransaction].self)
             }
         )
         
