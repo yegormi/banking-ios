@@ -1,4 +1,4 @@
-import APIClient
+import APIClientLive
 import ComposableArchitecture
 import Foundation
 import SharedModels
@@ -8,7 +8,12 @@ public struct Home: Reducer {
     @ObservableState
     public struct State: Equatable {
         @Presents var destination: Destination.State?
-        
+
+        var balance: AppBalance?
+        var cards: [AppCard] = []
+        var transactions: [AppTransaction] = []
+        var isLoading: Bool = false
+
         public init() {}
     }
 
@@ -18,12 +23,11 @@ public struct Home: Reducer {
         case `internal`(Internal)
         case view(View)
 
-        public enum Delegate {
-        }
+        public enum Delegate {}
 
         public enum Internal {
-            case balanceResponse(Result<AppBalance, Error>)
-            case cardsResponse(Result<[AppCard], Error>)
+            case balanceResponse(TaskResult<AppBalance>)
+            case cardsResponse(Result<AppCards, Error>)
             case transactionsResponse(Result<[AppTransaction], Error>)
         }
 
@@ -35,9 +39,8 @@ public struct Home: Reducer {
     }
 
     @Reducer(state: .equatable)
-    public enum Destination {
-    }
-    
+    public enum Destination {}
+
     @Dependency(\.apiClient) var api
 
     public init() {}
@@ -53,12 +56,36 @@ public struct Home: Reducer {
             case .destination:
                 return .none
 
-            case .internal:
+            case .internal(.balanceResponse(let result)):
+                switch result {
+                case .success(let balance):
+                    state.balance = balance
+                case .failure:
+                    state.balance = nil
+                }
+                return .none
+
+            case .internal(.cardsResponse(let result)):
+                switch result {
+                case .success(let cardsModel):
+                    state.cards = cardsModel.cards
+                case .failure:
+                    state.cards = []
+                }
+                return .none
+
+            case .internal(.transactionsResponse(let result)):
+                switch result {
+                case .success(let transactions):
+                    state.transactions = transactions
+                case .failure:
+                    state.transactions = []
+                }
                 return .none
 
             case .view(.binding):
                 return .none
-                
+
             case .view(.onFirstAppear):
                 return self.reload(&state)
 
@@ -68,12 +95,12 @@ public struct Home: Reducer {
         }
         .ifLet(\.$destination, action: \.destination)
     }
-    
+
     private func reload(_ state: inout State) -> Effect<Action> {
         return .run { send in
             await withDiscardingTaskGroup { group in
                 group.addTask {
-                    await send(.internal(.balanceResponse(Result {
+                    await send(.internal(.balanceResponse(TaskResult {
                         try await self.api.fetchBalance()
                     })))
                 }
@@ -83,7 +110,7 @@ public struct Home: Reducer {
                         try await self.api.fetchCards()
                     })))
                 }
-                
+
                 group.addTask {
                     await send(.internal(.transactionsResponse(Result {
                         try await self.api.fetchTransactions()

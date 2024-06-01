@@ -1,6 +1,7 @@
 // swift-tools-version: 5.9
 
 import PackageDescription
+import Foundation
 
 let package = Package(
     name: "banking-ios",
@@ -33,8 +34,8 @@ let package = Package(
             name: "APIClientLive",
             dependencies: [
                 "APIClient",
-                "SharedModels",
-            ]
+            ],
+            resources: [.process("Resources")]
         ),
         .target(
             name: "AppFeature",
@@ -50,20 +51,9 @@ let package = Package(
         .target(
             name: "HomeFeature",
             dependencies: [
-                "APIClient",
+                "APIClientLive",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 "SharedModels",
-                "Styleguide",
-                "SwiftUIHelpers"
-            ],
-            resources: [.process("Resources")]
-        ),
-        .target(
-            name: "TabsFeature",
-            dependencies: [
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                "Helpers",
-                "HomeFeature",
                 "Styleguide",
                 "SwiftUIHelpers"
             ],
@@ -82,6 +72,17 @@ let package = Package(
             name: "SwiftUIHelpers",
             dependencies: [
                 "Styleguide",
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "TabsFeature",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "Helpers",
+                "HomeFeature",
+                "Styleguide",
+                "SwiftUIHelpers"
             ],
             resources: [.process("Resources")]
         ),

@@ -1,7 +1,7 @@
 import APIClient
 import Dependencies
+import DependenciesMacros
 import Foundation
-import Helpers
 import SharedModels
 
 extension APIClient: DependencyKey {
@@ -10,19 +10,20 @@ extension APIClient: DependencyKey {
 
         let client = DataService.shared
 
-        return Self(
+        return APIClient(
             fetchBalance: {
-                clock.sleep(for: .seconds(1))
-                client.loadMockData(filename: "balance", type: AppBalance.self)
+                try await clock.sleep(for: .seconds(1))
+                return try await client.loadMockData(filename: "balance", type: AppBalance.self)
             },
             fetchCards: {
-                clock.sleep(for: .seconds(1))
-                client.loadMockData(filename: "cards", type: [AppCard].self)
+                try await clock.sleep(for: .seconds(2))
+                return try await client.loadMockData(filename: "cards", type: AppCards.self)
             },
             fetchTransactions: {
-                clock.sleep(for: .seconds(1))
-                client.loadMockData(filename: "transactions", type: [AppTransaction].self)
+                try await clock.sleep(for: .seconds(2))
+                return try await client.loadMockData(filename: "transactions", type: [AppTransaction].self)
             }
         )
+        
     }
 }

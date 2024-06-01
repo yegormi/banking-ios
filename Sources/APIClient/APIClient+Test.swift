@@ -5,5 +5,5 @@ import XCTestDynamicOverlay
 extension APIClient: TestDependencyKey {
     public static var testValue = Self()
 
-//    public static var previewValue: APIClient = .mock
+    public static var previewValue: APIClient = .mock
 }
