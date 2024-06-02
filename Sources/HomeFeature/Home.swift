@@ -61,7 +61,7 @@ public struct Home: Reducer {
                 guard
                     let amount = state.destination?.withdrawal?.amount,
                     let currentBalance = state.balance?.balance else { return .none }
-                let newBalance = currentBalance - Double(truncating: amount as NSNumber)
+                let newBalance = currentBalance - amount
                 state.balance = AppBalance(balance: newBalance)
                 state.destination = nil
                 return .none

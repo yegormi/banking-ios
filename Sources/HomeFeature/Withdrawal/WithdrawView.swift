@@ -31,7 +31,7 @@ public struct WithdrawalView: View {
                 .font(.system(size: 34, weight: .bold))
             }
             
-            Text("You \(self.store.isExceededBalance ? "only " : "")have \(self.store.balance.balance, specifier: "%.2f")\n available in your balance")
+            Text("You \(self.store.isExceededBalance ? "only " : "")have \(self.store.balance.balance)\n available in your balance")
                 .font(.system(size: 13, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)

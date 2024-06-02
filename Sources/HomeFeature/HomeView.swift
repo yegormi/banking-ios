@@ -20,7 +20,7 @@ public struct HomeView: View {
                         Text("🇪🇺 EUR account")
                             .font(.system(size: 15))
                             .foregroundStyle(Color.gray)
-                        Text("€\(self.store.balance?.balance ?? 0.0, specifier: "%.2f")")
+                        Text("€" + formatDecimal(self.store.balance?.balance ?? 0.0))
                             .font(.system(size: 28, weight: .bold))
                             .foregroundStyle(Color.primary)
                     }
@@ -96,6 +96,14 @@ public struct HomeView: View {
         .onAppear {
             send(.onAppear)
         }
+    }
+    
+    private func formatDecimal(_ value: Decimal) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.usesGroupingSeparator = true
+        return formatter.string(from: value as NSDecimalNumber) ?? ""
     }
 }
 

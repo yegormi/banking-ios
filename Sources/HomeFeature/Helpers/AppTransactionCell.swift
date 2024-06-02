@@ -30,7 +30,7 @@ struct CardTransactionCell: View {
                     .font(.system(size: 13, weight: .semibold))
             }
             Spacer()
-            Text(transaction.tribeTransactionType == .deposit ? "€\(transaction.amount, specifier: "%.2f")" : "-€\(transaction.amount, specifier: "%.2f")")
+            Text(transaction.tribeTransactionType == .deposit ? "€\(transaction.amount)" : "-€\(transaction.amount)")
                 .foregroundStyle(self.transaction.tribeTransactionType == .deposit ? Color.green : .black)
         }
     }
