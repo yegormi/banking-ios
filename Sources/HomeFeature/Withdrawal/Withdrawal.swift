@@ -16,8 +16,7 @@ public struct Withdrawal: Reducer {
         var focus: Field? = .amount
         var isExceededBalance: Bool {
             guard let amount = self.amount else { return false }
-            let balance = Decimal(floatLiteral: self.balance.balance)
-            return amount > balance
+            return amount > self.balance.balance
         }
         var isFormValid: Bool {
             guard let amount = self.amount else { return false }
