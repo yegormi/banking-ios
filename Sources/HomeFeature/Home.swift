@@ -46,6 +46,8 @@ public struct Home: Reducer {
     }
 
     @Dependency(\.apiClient) var api
+    
+    @Dependency(\.uuid) var uuid
 
     public init() {}
 
@@ -63,6 +65,18 @@ public struct Home: Reducer {
                     let currentBalance = state.balance?.balance else { return .none }
                 let newBalance = currentBalance - amount
                 state.balance = AppBalance(balance: newBalance)
+                let transaction = CardTransaction(
+                    id: self.uuid(),
+                    tribeTransactionId: self.uuid(),
+                    tribeCardId: 1,
+                    amount: amount,
+                    status: .completed,
+                    tribeTransactionType: .withdrawal,
+                    schemeId: self.uuid(),
+                    merchantName: "Withdrawal",
+                    pan: "ACH"
+                )
+                state.transactions.insert(transaction, at: 0)
                 state.destination = nil
                 return .none
                 

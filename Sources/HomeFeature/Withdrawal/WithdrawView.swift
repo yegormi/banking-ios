@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import Foundation
+import Helpers
 import Styleguide
 import SwiftUI
 import SwiftUIHelpers
@@ -31,10 +32,14 @@ public struct WithdrawalView: View {
                 .font(.system(size: 34, weight: .bold))
             }
             
-            Text("You \(self.store.isExceededBalance ? "only " : "")have \(self.store.balance.balance)\n available in your balance")
-                .font(.system(size: 13, weight: .semibold))
-                .multilineTextAlignment(.center)
-                .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)
+            Text("""
+                 You \(self.store.isExceededBalance ? "only " : "")have \(balanceLabel)
+                 available in your balance
+                 """
+            )
+            .font(.system(size: 13, weight: .semibold))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .bottom) {
@@ -52,6 +57,13 @@ public struct WithdrawalView: View {
             send(.onAppear)
         }
         .bind(self.$store.focus, to: self.$focus)
+    }
+    
+    private var balanceLabel: Text {
+        Text(self.store.balance.balance.toCurrency())
+            .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.black)
+            .fontWeight(self.store.isExceededBalance ? .semibold : .bold)
+            .font(.system(size: 13, weight: .bold))
     }
 }
 

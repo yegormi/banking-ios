@@ -21,7 +21,7 @@ struct CardTransactionCell: View {
                             .foregroundStyle(Color.red)
                     }
                 }
-            VStack {
+            VStack(alignment: .leading) {
                 Text(self.transaction.merchantName)
                     .foregroundStyle(Color.primary)
                     .font(.system(size: 15, weight: .semibold))
