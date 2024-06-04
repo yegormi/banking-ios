@@ -9,7 +9,7 @@ public struct EmptyTabView: View {
             Image(.appLogo)
             Text("Coming soon")
                 .font(.labelLarge)
-                .foregroundStyle(Color.gray)
+                .foregroundStyle(Color.neutral400)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

@@ -39,7 +39,7 @@ public struct WithdrawalView: View {
             )
             .font(.labelMedium)
             .multilineTextAlignment(.center)
-            .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)
+            .foregroundStyle(self.store.isExceededBalance ? Color.red500 : Color.neutral500)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .bottom) {
@@ -61,9 +61,7 @@ public struct WithdrawalView: View {
     
     private var balanceLabel: Text {
         Text(self.store.balance.balance.toCurrency())
-            .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.black)
             .fontWeight(self.store.isExceededBalance ? .semibold : .bold)
-            .font(.system(size: 13, weight: .bold))
     }
 }
 

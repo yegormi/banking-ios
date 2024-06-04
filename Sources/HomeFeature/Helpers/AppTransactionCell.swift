@@ -19,7 +19,7 @@ struct CardTransactionCell: View {
                     case .failed:
                         Circle()
                             .frame(width: 12, height: 12)
-                            .foregroundStyle(Color.red)
+                            .foregroundStyle(Color.red500)
                     }
                 }
             VStack(alignment: .leading) {
