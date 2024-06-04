@@ -18,19 +18,23 @@ public struct HomeView: View {
             VStack(spacing: 24) {
                 CardView {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("🇪🇺 EUR account")
-                            .font(.system(size: 15))
-                            .foregroundStyle(Color.gray)
+                        HStack(spacing: 8) {
+                            Image(.eurFlag)
+                            Text("EUR account")
+                                .font(.labelLarge)
+                                .foregroundStyle(Color.neutral500)
+                        }
                         Text((self.store.balance?.balance ?? 0.0).toCurrency())
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundStyle(Color.primary)
+                            .font(.headlineMedium)
+                            .foregroundStyle(Color.neutral900)
                     }
                 }
 
                 CardView {
                     HStack {
                         Text("My cards")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(.headlineSmall)
+                            .foregroundStyle(Color.neutral800)
                         Spacer()
                         Button("See all") {}
                     }
@@ -45,7 +49,8 @@ public struct HomeView: View {
                 CardView {
                     HStack {
                         Text("Recent transactions")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(.headlineSmall)
+                            .foregroundStyle(Color.neutral800)
                         Spacer()
                         Button("See all") {}
                     }
@@ -58,6 +63,7 @@ public struct HomeView: View {
                 }
 
             }
+            .padding(.top, 24)
         }
         .contentMargins(.horizontal, 16, for: .scrollContent)
         .toolbar {

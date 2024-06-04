@@ -24,7 +24,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
         configuration
             .label
             .frame(maxWidth: size == .fullWidth ? .infinity : nil)
-            .font(.system(size: 16, weight: .semibold))
+            .font(.titleMedium)
             .foregroundStyle(Color.white)
             .padding(.vertical, size.verticalPadding)
             .padding(.horizontal, size.horizontalPadding)
