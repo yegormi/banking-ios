@@ -7,4 +7,5 @@ extension Color {
     public static let neutral500 = Color(.neutral500)
     public static let neutral400 = Color(.neutral500)
     public static let red500 = Color(.red500)
+    public static let green500 = Color(.green500)
 }

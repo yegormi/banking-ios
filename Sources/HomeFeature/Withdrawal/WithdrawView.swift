@@ -62,6 +62,7 @@ public struct WithdrawalView: View {
     private var balanceLabel: Text {
         Text(self.store.balance.balance.toCurrency())
             .fontWeight(self.store.isExceededBalance ? .semibold : .bold)
+            .foregroundStyle(self.store.isExceededBalance ? Color.red500 : .neutral800)
     }
 }
 
