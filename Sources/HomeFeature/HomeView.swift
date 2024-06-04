@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import Foundation
+import Helpers
 import Styleguide
 import SwiftUI
 import SwiftUIHelpers
@@ -23,7 +24,7 @@ public struct HomeView: View {
                                 .font(.labelLarge)
                                 .foregroundStyle(Color.neutral500)
                         }
-                        Text("€\(self.store.balance?.balance ?? 0.0, specifier: "%.2f")")
+                        Text((self.store.balance?.balance ?? 0.0).toCurrency())
                             .font(.headlineMedium)
                             .foregroundStyle(Color.neutral900)
                     }

@@ -22,7 +22,7 @@ struct CardTransactionCell: View {
                             .foregroundStyle(Color.red)
                     }
                 }
-            VStack {
+            VStack(alignment: .leading) {
                 Text(self.transaction.merchantName)
                     .foregroundStyle(Color.primary)
                     .font(.labelLarge)
@@ -31,7 +31,7 @@ struct CardTransactionCell: View {
                     .font(.labelMedium)
             }
             Spacer()
-            Text(transaction.tribeTransactionType == .deposit ? "€\(transaction.amount, specifier: "%.2f")" : "-€\(transaction.amount, specifier: "%.2f")")
+            Text(transaction.tribeTransactionType == .deposit ? "€\(transaction.amount)" : "-€\(transaction.amount)")
                 .foregroundStyle(self.transaction.tribeTransactionType == .deposit ? Color.green : .black)
                 .font(.titleMedium)
         }

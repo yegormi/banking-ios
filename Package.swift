@@ -53,6 +53,7 @@ let package = Package(
             dependencies: [
                 "APIClientLive",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "Helpers",
                 "SharedModels",
                 "Styleguide",
                 "SwiftUIHelpers"
