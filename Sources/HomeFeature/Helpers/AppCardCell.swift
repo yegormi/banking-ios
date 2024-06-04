@@ -1,5 +1,6 @@
 import SwiftUI
 import SharedModels
+import Styleguide
 
 struct AppCardCell: View {
     let card: AppCard
@@ -7,16 +8,16 @@ struct AppCardCell: View {
     var body: some View {
         HStack(spacing: 12) {
             RoundedRectangle(cornerRadius: 4)
-                .foregroundStyle(Color.primary)
+                .foregroundStyle(Color.neutral800)
                 .frame(width: 48, height: 32)
                 .overlay(alignment: .bottomTrailing) {
                     Text(card.cardLast4)
-                        .foregroundStyle(Color(.systemBackground))
+                        .foregroundStyle(Color.white)
                         .font(.system(size: 10, weight: .bold))
                         .padding(6)
                 }
             Text(card.cardName)
-                .foregroundStyle(Color.primary)
+                .foregroundStyle(Color.neutral900)
                 .font(.system(size: 15, weight: .semibold))
         }
     }
