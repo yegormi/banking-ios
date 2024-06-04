@@ -97,21 +97,3 @@ public extension CardView where Header == EmptyView {
         self.content = content
     }
 }
-
-public extension CardView {
-    init(
-        headerTitle: String,
-        headerAction: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.header = {
-            HStack {
-                Text(headerTitle)
-                    .font(.system(size: 17, weight: .semibold))
-                Spacer()
-                Button("See all", action: headerAction)
-            } as! Header
-        }
-        self.content = content
-    }
-}

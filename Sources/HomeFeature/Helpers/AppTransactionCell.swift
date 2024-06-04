@@ -1,4 +1,5 @@
 import SwiftUI
+import Styleguide
 import SharedModels
 
 struct CardTransactionCell: View {
@@ -24,15 +25,15 @@ struct CardTransactionCell: View {
             VStack {
                 Text(self.transaction.merchantName)
                     .foregroundStyle(Color.primary)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.labelLarge)
                 Text("•• 4444")
                     .foregroundStyle(Color.gray)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.labelMedium)
             }
             Spacer()
             Text(transaction.tribeTransactionType == .deposit ? "€\(transaction.amount, specifier: "%.2f")" : "-€\(transaction.amount, specifier: "%.2f")")
                 .foregroundStyle(self.transaction.tribeTransactionType == .deposit ? Color.green : .black)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.titleMedium)
         }
     }
 }

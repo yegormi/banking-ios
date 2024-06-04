@@ -20,11 +20,11 @@ public struct HomeView: View {
                         HStack(spacing: 8) {
                             Image(.eurFlag)
                             Text("EUR account")
-                                .font(.system(size: 15, weight: .semibold))
+                                .font(.labelLarge)
                                 .foregroundStyle(Color.neutral500)
                         }
                         Text("€\(self.store.balance?.balance ?? 0.0, specifier: "%.2f")")
-                            .font(.system(size: 28, weight: .bold))
+                            .font(.headlineMedium)
                             .foregroundStyle(Color.neutral900)
                     }
                 }
@@ -32,7 +32,7 @@ public struct HomeView: View {
                 CardView {
                     HStack {
                         Text("My cards")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(.headlineSmall)
                             .foregroundStyle(Color.neutral800)
                         Spacer()
                         Button("See all") {}
@@ -48,7 +48,7 @@ public struct HomeView: View {
                 CardView {
                     HStack {
                         Text("Recent transactions")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(.headlineSmall)
                             .foregroundStyle(Color.neutral800)
                         Spacer()
                         Button("See all") {}

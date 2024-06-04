@@ -18,7 +18,7 @@ struct AppCardCell: View {
                 }
             Text(card.cardName)
                 .foregroundStyle(Color.neutral900)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.labelLarge)
         }
     }
 }

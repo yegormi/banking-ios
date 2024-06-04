@@ -28,11 +28,11 @@ public struct WithdrawalView: View {
                     )
                     .focused(self.$focus, equals: .amount)
                 }
-                .font(.system(size: 34, weight: .bold))
+                .font(.headlineLarge)
             }
             
             Text("You \(self.store.isExceededBalance ? "only " : "")have \(self.store.balance.balance, specifier: "%.2f")\n available in your balance")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.labelMedium)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(self.store.isExceededBalance ? Color.red : Color.gray)
         }

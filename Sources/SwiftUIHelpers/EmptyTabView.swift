@@ -1,4 +1,5 @@
 import SwiftUI
+import Styleguide
 
 public struct EmptyTabView: View {
     public init() {}
@@ -7,7 +8,7 @@ public struct EmptyTabView: View {
         VStack(spacing: 8) {
             Image(.appLogo)
             Text("Coming soon")
-                .font(.system(size: 15, weight: .semibold))
+                .font(.labelLarge)
                 .foregroundStyle(Color.gray)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
